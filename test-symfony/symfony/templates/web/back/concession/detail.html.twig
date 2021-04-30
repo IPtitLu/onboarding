@@ -1,0 +1,81 @@
+{% extends 'web/back/base.html.twig' %}
+
+{% import 'web/back/macros/buttons.html.twig' as buttons %}
+{% import 'web/back/macros/icons.html.twig' as icons %}
+
+{% block header %}
+    <div class="page-header">
+        <div class="left">
+            <h1 class="title">
+                {{ icons.concession()}}
+                {{ 'app.concession.plural'|trans }}
+            </h1>
+        </div>
+        <div class="right">
+            <a class="btn btn-default" href="{{ path('concession_back_index') }}">
+                <i class="fa fa-caret-left"></i>
+                {{ 'app.common.action.back'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="panel panel-default ps-lg-4">
+            <div class="panel-title text-center">
+                {{ concessions.name }}
+            </div>
+
+            <div class="panel-body text-center">
+                {{ concessions.city }}
+            </div>
+
+            {% if concessions.users != null %}
+                <div class="panel-body text-center"  style="margin-top: 10px;">
+                    {{ 'app.concession.user_length'|trans ~ concessions.users|length }}
+                </div>
+
+                <div class="panel panel-default" style="margin-top: 20px; display: none;">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <colgroup>
+                                    <col />
+                                    <col />
+                                    <col  width="1"/>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>{{ 'app.user.first_name'|trans }}</th>
+                                    <th>{{ 'app.user.last_name'|trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {%for user in concessions.users %}
+                                    <tr>
+                                        <td>{{ user.firstName }}</td>
+                                        <td>{{ user.lastName }}</td>
+                                    </tr>
+                                {%endfor%}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+            <div class="col-lg-12">
+                <div class="panel-header" style="display: flex; justify-content: space-around;">
+                    <div class="panel-group">
+                        {{ buttons.delete(path('concession_back_delete', {'id': concessions.id})) }}
+                    </div>
+                    <div class="panel-group">
+                        {{ buttons.update(path('concession_back_update', {'id': concessions.id})) }}
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

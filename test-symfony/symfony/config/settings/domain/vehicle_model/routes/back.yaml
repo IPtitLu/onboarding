@@ -1,0 +1,26 @@
+vehicle_model_back_index:
+    path: /vehicle-models
+    controller: App\Domain\VehicleModel\Controller\Web\VehicleModelController::index
+
+vehicle_model_back_show:
+    path: /vehicle-models/{id}
+    controller: App\Domain\VehicleModel\Controller\Web\VehicleModelController::show
+    requirements:
+        id: '\d+'
+
+vehicle_model_back_export:
+    path: /vehicle-models/export
+    controller: App\Domain\VehicleModel\Controller\Web\VehicleModelController::export
+
+vehicle_model_back_create:
+    path: /vehicle-models/create
+    controller: App\Domain\VehicleModel\Controller\Web\VehicleModelController::create
+
+vehicle_model_back_update:
+    path: /vehicle-models/{id}/update
+    controller: App\Domain\VehicleModel\Controller\Web\VehicleModelController::update
+
+vehicle_model_back_delete:
+    path: /vehicle-models/{id}/delete
+    controller: App\Domain\VehicleModel\Controller\Web\VehicleModelController::delete
+

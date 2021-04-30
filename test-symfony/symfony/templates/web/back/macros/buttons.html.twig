@@ -1,0 +1,109 @@
+{% macro update(url) %}
+    <a href="{{ url }}" class="btn btn-default" data-test="update-btn">
+        <i class="fa fa-pencil"></i>
+        {{ 'app.common.action.update'|trans }}
+    </a>
+{% endmacro %}
+
+{% macro back() %}
+    <a href="{{ app.request.headers.get('referer')|default('/') }}" class="btn btn-default">
+        <i class="fa fa-caret-left"></i>
+        {{ 'app.common.action.back'|trans }}
+    </a>
+{% endmacro %}
+
+{% macro show(url, block = false, label = null) %}
+    <a href="{{ url }}" class="btn btn-default{% if block is same as(true) %} btn-block{% endif %}">
+        <i class="fa fa-eye"></i>
+        {{ label|default('app.common.action.detail')|trans }}
+    </a>
+{% endmacro %}
+
+{% macro share(url, block = false) %}
+    <a href="{{ url }}" class="btn btn-default{% if block is same as(true) %} btn-block{% endif %}">
+        <i class="fa fa-share" aria-hidden="true"></i>
+        {{ 'app.common.action.share'|trans }}
+    </a>
+{% endmacro %}
+
+{% macro download(url, block = false) %}
+    <a href="{{ url }}" class="btn btn-default{% if block is same as(true) %} btn-block{% endif %}">
+        <i class="fa fa-download" aria-hidden="true"></i>
+        {{ 'app.common.action.download'|trans }}
+    </a>
+{% endmacro %}
+
+{% macro search() %}
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-search"></i>
+        {{ 'app.common.action.search'|trans }}
+    </button>
+{% endmacro %}
+
+{% macro submit() %}
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-save"></i>
+        {{ 'app.common.action.submit'|trans }}
+    </button>
+{% endmacro %}
+
+{% macro upd() %}
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-pencil"></i>
+        {{ 'app.common.action.update'|trans }}
+    </button>
+{% endmacro %}
+
+{% macro delete(url) %}
+    <button
+            type="button"
+            class="btn btn-danger"
+            data-test="delete-btn"
+            onclick="if(confirm('{{ 'app.common.action.delete_confirmation'|trans }}')) window.location.href = '{{ url }}'"
+    >
+        <i class="fa fa-times"></i>
+        {{ 'app.common.action.delete'|trans }}
+    </button>
+{% endmacro %}
+
+{% macro reinitialize(url) %}
+    <a href="{{ path(url) }}" class="btn">{{ 'app.common.action.reinit'|trans }}</a>
+{% endmacro %}
+
+{% macro searchActions(reinitializeUrl) %}
+    {% import 'web/back/macros/buttons.html.twig' as buttons %}
+    <div class="form-actions">
+        {{ buttons.search() }}
+        {{ buttons.reinitialize(reinitializeUrl) }}
+    </div>
+{% endmacro %}
+
+{% macro file(formMediaField) %}
+    {% set formMediaElement = formMediaField.mediaFile %}
+    <div class="form-group{% if formMediaElement.vars.errors|length %} has-error{% endif %}">
+        <label>{{ formMediaField.vars.label|trans }}</label>
+        <div style="margin-bottom: 5px;">
+            <input id="{{ formMediaElement.vars.id }}" type="file" name="{{ formMediaElement.file.vars.full_name }}"
+                   style="display: none;">
+        </div>
+        {% if formMediaElement.vars.download_uri is defined and formMediaElement.vars.download_uri is not empty %}
+            <div class="btn-group">
+                <a target="_blank" href="{{ formMediaElement.vars.download_uri }}" class="btn btn-info">
+                    <i class="fa fa-binoculars fa-fw"></i>{{ 'app.common.action.detail'|trans }}
+                </a>
+                {{ buttons.delete(path('back_sponsor_delete_logo', {id: entity.id})) }}
+            </div>
+        {% endif %}
+        {{ form_errors(formMediaElement) }}
+    </div>
+    {% do formMediaField.setRendered %}
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            $('#{{ formMediaField.mediaFile.vars.id }}').filestyle({
+                buttonText: '{{ 'app.common.action.browse'|trans }}',
+                buttonBefore: true,
+                placeholder: '{% if formMediaField.vars.value %}{{ formMediaField.vars.value.filename }}{% endif %}'
+            });
+        });
+    </script>
+{% endmacro %}

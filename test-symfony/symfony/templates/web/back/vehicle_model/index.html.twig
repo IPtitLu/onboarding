@@ -1,0 +1,82 @@
+{% extends 'web/back/base.html.twig' %}
+
+{% import 'web/back/macros/buttons.html.twig' as buttons %}
+{% import 'web/back/macros/icons.html.twig' as icons %}
+
+{% block header %}
+ <div class="page-header" >
+        <div class="left">
+            <h1 class="title">
+                {{ icons.vehicle }}
+                {{ 'app.vehicle_model.plural'|trans }}
+            </h1>
+        </div>
+        <div class="right">
+
+            <a href="{{ path('vehicle_model_back_export', app.request.query.all) }}" class="btn btn-default text-right" data-test="update-btn">
+                <i class="fa fa-share"></i>
+                {{ 'app.common.action.share'|trans }}
+            </a>
+            <a href="{{ path('vehicle_model_back_create') }}" class="btn btn-default text-right" data-test="update-btn">
+                <i class="fa fa-pencil"></i>
+                {{ 'app.user.create'|trans }}
+            </a>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{ form_start(form, {attr:{novalidate:"novalidate"}}) }}
+            <div class="row">
+                <div class="col-lg-6">
+                    {{ form_row(form.brand) }}
+                </div>
+                <div class="col-lg-6">
+                    {{ form_row(form.name) }}
+                </div>
+            </div>
+
+            {{ buttons.search }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <colgroup>
+                        <col />
+                        <col />
+                        <col width="1"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>{{ 'app.vehicle_model.brand'|trans }}</th>
+                        <th>{{ 'app.vehicle_model.name'|trans }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for vehicle_model in vehicle_models %}
+                        <tr>
+                            <td>{{ vehicle_model.brand }}</td>
+                            <td>{{ vehicle_model.name }}</td>
+                            <td>{{ buttons.show(path('vehicle_model_back_show', {'id': vehicle_model.id})) }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-around;">
+        <div>
+            {{ knp_pagination_render(vehicle_models) }}
+        </div>
+    </div>
+{% endblock %}

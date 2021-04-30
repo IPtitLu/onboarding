@@ -1,0 +1,34 @@
+{% extends 'web/back/base.html.twig' %}
+
+{% import 'web/back/macros/buttons.html.twig' as buttons %}
+{% import 'web/back/macros/icons.html.twig' as icons %}
+
+{% block header %}
+    <div class="page-header">
+        <div class="left">
+            <h1 class="title">
+                {{ icons.user }}
+                {{ 'app.user.vehicle'|trans }}
+            </h1>
+        </div>
+        <div class="right">
+            <a class="btn btn-default" href="{{ path('vehicle_back_index', {'id': user.id}) }}">
+                <i class="fa fa-caret-left"></i>
+                {{ 'app.common.action.back'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{ form_start(form, {attr:{novalidate:"novalidate"}}) }}
+            {{ form_row(form.color) }}
+            {{ form_row(form.vehicleModel) }}
+            {{ form_row(form.vehicleModel) }}
+            {{ buttons.submit }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

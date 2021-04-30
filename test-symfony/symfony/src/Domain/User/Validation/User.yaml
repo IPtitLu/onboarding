@@ -1,0 +1,14 @@
+App\Domain\User\Entity\User:
+    properties:
+        firstName:
+            - NotBlank: ~
+        lastName:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
+        plainPassword:
+            - NotBlank:
+                  groups: [user_create]
+        vehicles:
+            - Valid: ~
