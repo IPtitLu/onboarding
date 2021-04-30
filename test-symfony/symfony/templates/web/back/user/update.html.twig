@@ -1,0 +1,80 @@
+{% extends 'web/back/base.html.twig' %}
+
+{% import 'web/back/macros/buttons.html.twig' as buttons %}
+{% import 'web/back/macros/icons.html.twig' as icons %}
+
+{% import _self as formMacros %}
+
+{% macro vehicleForm(vehicle) %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form_row(vehicle.color) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(vehicle.vehicleModel) }}
+                </div>
+                <button class="remove-collection-item">Supprimer</button>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% block header %}
+    <div class="page-header">
+        <div class="left">
+            <h1 class="title">
+                {{ icons.user }}
+                {{ 'app.user.plural'|trans }}
+            </h1>
+        </div>
+        <div class="right">
+            <a class="btn btn-default" href="{{ app.request.headers.get('referer')|default('/') }}">
+                <i class="fa fa-caret-left"></i>
+                {{ 'app.common.action.back'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{ form_start(form, {attr:{novalidate:"novalidate"}}) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.roles) }}
+            {{ form_label(form.vehicles) }}
+
+            <div>
+                <ul id="vehicles-list" class="list-unstyled"
+                    data-prototype="{{ formMacros.vehicleForm(form.vehicles.vars.prototype)|e('html_attr') }}"
+                    data-widget-tags="{{ '<li></li>'|e }}"
+                    data-widget-counter="{{ form.vehicles|length }}">
+                    {% for vehicle in form.vehicles %}
+                        <li>
+                            {{ formMacros.vehicleForm(vehicle) }}
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+                <button
+                        type="button"
+                        class="add-another-collection-widget btn btn-default"
+                        data-list-selector="#vehicles-list">{{ icons.plus }}{{ 'app.user.vehicle_add'|trans }}
+                </button>
+            </div>
+
+            <div class="text-right">
+                {{ buttons.upd }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

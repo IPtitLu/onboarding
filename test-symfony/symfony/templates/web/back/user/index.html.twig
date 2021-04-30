@@ -1,0 +1,87 @@
+{% extends 'web/back/base.html.twig' %}
+
+{% import 'web/back/macros/buttons.html.twig' as buttons %}
+{% import 'web/back/macros/icons.html.twig' as icons %}
+
+{% block header %}
+    <div class="page-header" >
+        <div class="left">
+            <h1 class="title">
+                {{ icons.user }}
+                {{ 'app.user.plural'|trans }}
+            </h1>
+        </div>
+        <div class="right">
+
+            <a href="{{ path('user_back_export', app.request.query.all) }}" class="btn btn-default text-right" data-test="update-btn">
+                <i class="fa fa-share"></i>
+                {{ 'app.common.action.share'|trans }}
+            </a>
+            <a href="{{ path('user_back_create') }}" class="btn btn-default text-right" data-test="update-btn">
+                <i class="fa fa-pencil"></i>
+                {{ 'app.user.create'|trans }}
+            </a>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{ form_start(form, {attr:{novalidate:"novalidate"}}) }}
+                <div class="row">
+                    <div class="col-lg-4">
+                        {{ form_row(form.firstName) }}
+                    </div>
+                    <div class="col-lg-4">
+                        {{ form_row(form.lastName) }}
+                    </div>
+                    <div class="col-lg-4">
+                        {{ form_row(form.email) }}
+                    </div>
+                </div>
+
+            {{ buttons.search }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <colgroup>
+                        <col />
+                        <col />
+                        <col />
+                        <col  width="1"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>{{ 'app.user.first_name'|trans }}</th>
+                        <th>{{ 'app.user.last_name'|trans }}</th>
+                        <th>{{ 'app.user.concession'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.concession.name }}</td>
+                                <td>{{ buttons.show(path('user_back_show', {'id': user.id})) }}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-around;">
+        <div>
+            {{ knp_pagination_render(users) }}
+        </div>
+    </div>
+{% endblock %}

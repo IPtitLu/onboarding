@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="App\Domain\User\Manager\UserManager" public="true">
+            <argument type="expression">service('doctrine').getRepository('UserDomain:User')</argument>
+            <argument type="service" id="knp_paginator"/>
+            <argument type="service" id="security.user_password_encoder.generic"/>
+            <argument type="service" id="serializer"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+
+        </service>
+        <service id="App\Domain\User\Security\LoginFormAuthenticator" public="true">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="router.default"/>
+            <argument type="service" id="security.csrf.token_manager"/>
+            <argument type="service" id="security.user_password_encoder.generic"/>
+        </service>
+        <service id="App\Domain\User\Entity\User">
+            <argument type="service" id="api_platform.action.documentation"/>
+        </service>
+        <service id="App\Domain\User\Security\UserVoter">
+            <argument type="service" id="security.helper"/>
+            <tag name="security.voter"/>
+        </service>
+        <service id="App\Domain\User\Message\Handler\CreateUserCsvMessageHandler">
+            <argument type="service" id="App\Domain\User\Manager\UserManager"/>
+            <argument type="service" id="App\Domain\Export\Manager\ExportManager"/>
+            <argument type="service" id="translator.data_collector"/>
+            <tag name="messenger.message_handler"
+                 handles="App\Domain\User\Message\CreateUserCsvMessage"/>
+        </service>
+
+        <service id="App\Domain\User\Manager\VehicleManager" public="true">
+            <argument type="expression">service('doctrine').getRepository('VehicleDomain:Vehicle')</argument>
+
+        </service>
+    </services>
+
+
+</container>

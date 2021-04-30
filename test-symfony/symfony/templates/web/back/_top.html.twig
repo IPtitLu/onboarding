@@ -1,0 +1,20 @@
+{% import 'web/back/macros/icons.html.twig' as icons %}
+
+<div id="top" class="clearfix">
+    <div class="applogo">
+        <a href="{{ path('user_back_index') }}" class="logo">{{ 'app.common.brand'|trans }}</a>
+    </div>
+
+    <!-- Start Sidebar Show Hide Button -->
+    <a href="javascript:" class="sidebar-open-button"><i class="fa fa-bars"></i></a>
+    <a href="javascript:" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a>
+    <!-- End Sidebar Show Hide Button -->
+
+    <div class="top-right">
+        <a class="btn btn-rounded btn-default" href="{{ path('user_back_self') }}">
+            {{ icons.self }}
+            {{ 'app.user.self'|trans }}
+        </a>
+        <a href="{{ path('user_back_logout') }}" class="btn btn-rounded btn-default"><i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'app.user.logout'|trans }}</a>
+    </div>
+</div>
