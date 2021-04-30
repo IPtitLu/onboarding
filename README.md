@@ -1,7 +1,5 @@
 OnBoarding modalité d’installation :
 
-Ouvrir le fichier zip
-
 Installer docker-compose
 Lancer la commande suivante à la racine du projet : docker-compose up —build
 
