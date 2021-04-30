@@ -1,7 +1,0 @@
-export_back_index:
-    path: /exports
-    controller: App\Domain\Export\Controller\Web\ExportController::index
-
-export_back_download:
-    path: /exports/{id}
-    controller: App\Domain\Export\Controller\Web\ExportController::download

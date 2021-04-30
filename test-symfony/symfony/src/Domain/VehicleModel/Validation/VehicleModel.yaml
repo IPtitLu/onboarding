@@ -1,6 +1,0 @@
-App\Domain\VehicleModel\Entity\VehicleModel:
-    properties:
-        brand:
-            - NotBlank: ~
-        name:
-            - NotBlank: ~

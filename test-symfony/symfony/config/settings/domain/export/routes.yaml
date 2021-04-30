@@ -1,3 +1,0 @@
-back:
-    resource: routes/back.yaml
-    host: admin.test-symfony.vlabs

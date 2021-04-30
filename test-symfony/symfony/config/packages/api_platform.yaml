@@ -1,8 +1,0 @@
-api_platform:
-    title: 'OnBoarding'
-    mapping:
-        paths: ['%kernel.project_dir%/src/Domain/User/Entity']
-    patch_formats:
-        json: ['application/merge-patch+json']
-    swagger:
-        versions: [3]

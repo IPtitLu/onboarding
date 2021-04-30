@@ -1,7 +1,0 @@
-Id,Prénom,Nom,Email,Role
-1,test,test,test@test.test,ROLE_SUPER_ADMIN
-3,"Ptit Lu","Le grand Super Admin",sa@sa.sa,ROLE_SUPER_ADMIN
-4,kia,kia,kia@kia.kia,ROLE_ADMIN
-5,kia1,kia1,kia1@kia1.kia1,ROLE_EMPLOYER
-6,kia2,kia2,kia2@kia2.kia2,ROLE_EMPLOYER
-7,a,a,a@a.a,ROLE_CUSTOMER

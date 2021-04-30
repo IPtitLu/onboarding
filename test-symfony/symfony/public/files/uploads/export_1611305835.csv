@@ -1,7 +1,0 @@
-Id,Prénom,Nom,Email,Role
-12,Lucas,Perez,lulu2@gmail.com,ROLE_EMPLOYEE
-15,a,a,a@a.a,ROLE_EMPLOYEE
-16,SuperAdmin,SuperAdmin,SuperAdmin@a.a,ROLE_SUPER_ADMIN
-17,SA,SA,sa@sa.sa,ROLE_SUPER_ADMIN
-18,test,test,test@test.test,ROLE_SUPER_ADMIN
-19,b,b,b@b.b,ROLE_CUSTOMER
