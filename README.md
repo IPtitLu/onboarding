@@ -3,22 +3,36 @@ OnBoarding modalité d’installation :
 Installer docker-compose
 Lancer la commande suivante à la racine du projet : docker-compose up —build
 
+Installer yarn et composer sur son poste :
+
+Lancer la commande suivante pour accéder au container php :
+./runner php dev
+Lancer ensuite la commande : 
+composer install
+Pour finir, quitter avec : 
+exit 
+
+Lancer la commande suivante dans le dossier symfony, pour installer les dépendances :
+yarn install 
+
 Dans le ficher hosts du pc, ajouter les ligne suivante :
 127.0.0.1 admin.test-symfony.vlabs
 
-URL du login :
-http://admin.test-symfony.vlabs/login
+Pour la partie base de donnée, étant donné que le serveur est un mariadb sur le docker.
+Utiliser de préférence phpstorm, avec la fenètre database intégrée.
+Quand les box docker sont actives :
+Sur la fenètre db de php storm, ajouter mariadb, la connexion se fera toute seule.
+Ensuite, il faut ajouter la db "symfony" et y insérer le script database.sql
+à la racine du projet.
+
+Dans le fichier .env, modifier le contenu selon la database installée (si différent).
+Par défaut :
+DATABASE_URL="mysql://root:root@mariadb:3306/symfony?serverVersion=mariadb-10.3.40charset=utf8"
 
 Identifiant super admin :
 sa@sa.sa
 Mot de passe super admin :
 Sa
 
-Créer la database :
-symfony
-
-Y Insérer le fichier database.sql du dossier database à la racine du projet
-
-Dans le fichier .env, modifier le contenu selon la database installée.
-Par défaut :
-DATABASE_URL="mysql://root:root@mariadb:3306/symfony?serverVersion=mariadb-10.3.40charset=utf8"
+URL du login :
+http://admin.test-symfony.vlabs/login
